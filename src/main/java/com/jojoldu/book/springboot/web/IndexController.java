@@ -1,5 +1,6 @@
 package com.jojoldu.book.springboot.web;
 
+import com.jojoldu.book.springboot.config.auth.LoginUser;
 import com.jojoldu.book.springboot.config.auth.dto.SessionUser;
 import com.jojoldu.book.springboot.domain.posts.Posts;
 import com.jojoldu.book.springboot.service.posts.PostsService;
@@ -18,9 +19,10 @@ public class IndexController {
     private final PostsService postsService;
     private final HttpSession httpSession;
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts",postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        //        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        //        기존 세션에서 가져오던 세션정보 값이 개선
         // 앞서 작성된 customOAuth2UserService에서 로그인 성공시 세션에 SessionUser를 저장
         // 로그인 성공시 httpSession.getAttribute("user") 값을 가져올 수 있음
         

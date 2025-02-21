@@ -8,12 +8,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
-@RestController("/api/v1/posts")
+@RestController
+@RequestMapping("/api/v1/posts")
 public class PostsApiController
 {
     private final PostsService postsService;
 
-    @PostMapping("/")
+    @PostMapping("")
     public Long save(@RequestBody PostsSaveRequestDto requestDto){
         return postsService.save(requestDto);
     }
